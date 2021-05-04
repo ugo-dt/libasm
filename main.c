@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:27:20 by ugdaniel          #+#    #+#             */
-/*   Updated: 2021/05/04 13:08:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2021/05/04 14:29:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	test_ft_strcmp()
 
 void	test_write(int fd, char *s, size_t len)
 {
-	printf("--------------------------\n");
+	printf("-------------------------\n");
 	int	a;
 	errno = 0;
 	printf("write(%d, \"%s\", %zu):\t\t", fd, s, len);
@@ -142,7 +142,7 @@ void	test_ft_write(void)
 
 void	test_read(char *name, size_t len, char wrongfd)
 {
-	printf("--------------------------\n");
+	printf("-------------------------\n");
 	char buf[100];
 	int	a, fd;
 	errno = 0;
@@ -175,13 +175,38 @@ void	test_read(char *name, size_t len, char wrongfd)
 
 void	test_ft_read(void)
 {
-	printf("-------------------------\n");
+	printf("------------------------\n");
 	printf("----- ft_read test -----\n");
 	fflush(stdout);
 	test_read("test.txt", 7, 0);
 	test_read("test.txt", 89, 0);
 	test_read("test.txt", 2, 0);
 	test_read("test.txt", 7, 1);
+}
+
+void	test_strdup(char *str)
+{
+	char *buf;
+	char *buf2;
+
+	printf("--------------------------\n");
+	buf = strdup(str);
+	buf2 = ft_strdup(str);
+	printf("strdup(\"%s\") à %p:\n%s à %p\n\n", str, str, buf, buf);
+	printf("ft_strdup(\"%s\") à %p:\n%s à %p\n", str, str, buf2, buf2);
+	free(buf);
+	free(buf2);
+}
+
+void	test_ft_strdup(void)
+{
+	printf("--------------------------\n");
+	printf("----- ft_strdup test -----\n");
+	fflush(stdout);;
+	test_strdup("Coucou");
+	test_strdup("dazdazdazdazdazdaazdza");
+	test_strdup("");
+	test_strdup("salut");
 }
 
 int		main(void)
@@ -191,6 +216,6 @@ int		main(void)
 	test_ft_strcmp();
 	test_ft_write();
 	test_ft_read();
-/*	test_ft_strdup();*/
+	test_ft_strdup();
 	return (0);
 }

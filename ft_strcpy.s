@@ -8,6 +8,7 @@ copy:
 	je		return
 	mov		al, byte [rsi + rcx]	;temp variable al
 	mov		byte [rdi + rcx], al	;dest[rcx] = al
+	inc rcx
 	jmp		copy
 
 return:
