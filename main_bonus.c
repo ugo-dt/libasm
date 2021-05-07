@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:27:20 by ugdaniel          #+#    #+#             */
-/*   Updated: 2021/05/07 13:14:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:56:38 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ ssize_t			ft_write(int fd, const void *buf, size_t count);
 ssize_t			ft_read(int fd, void *buf, size_t count);
 char			*ft_strdup(const char *s);
 
-/* Bonuses */
-void			ft_list_push_front(t_list **begin_list, void *data);
 int				ft_list_size(t_list *begin);
 
 void			test_ft_strlen(void)
 {
-	char	str[] = "Hello World!";
-	char	str2[] = "comment ca va lololololollololololollololololol";
-	char	str3[] = "";
+	char	*str = "Hello World!";
+	char	*str2 = "comment ca va lololololollololololollololololol";
+	char	*str3 = "";
+	char	*str4 = NULL;
 
 	printf("--------------------------\n");
 	printf("----- ft_strlen test -----\n");
@@ -60,7 +59,7 @@ void			test_strcpy(char *src)
 {
 	char	dest[] = "aaaaaaaaaa";
 
-	printf("str: %s\ndest before: \"%s\"\n", src, dest);
+	printf("src: \"%s\"\ndest before: \"%s\"\n", src, dest);
 	ft_strcpy(dest, src);
 	printf("dest after: \"%s\"\n", dest);
 	fflush(stdout);
@@ -95,19 +94,19 @@ void			test_ft_strcmp()
 	printf("--------------------------\n");
 	printf("----- ft_strcmp test -----\n");
 	printf("--------------------------\n");
-	printf("str: %s\nstr2: %s\n", str, str2);
+	printf("str: \"%s\"\nstr2: \"%s\"\n", str, str2);
 	printf("strcmp: %d\n", strcmp(str, str2));
 	printf("ft_strcmp: %d\n", ft_strcmp(str, str2));
 	printf("--------------------------\n");
-	printf("str3: %s\nstr4: %s\n", str3, str4);
+	printf("str3: \"%s\"\nstr4: \"%s\"\n", str3, str4);
 	printf("strcmp: %d\n", strcmp(str3, str4));
 	printf("ft_strcmp: %d\n", ft_strcmp(str3, str4));
 	printf("--------------------------\n");
-	printf("(empty strings)\nstr5: %s\nstr6: %s\n", str5, str6);
+	printf("(empty strings)\nstr5: \"%s\"\nstr6: \"%s\"\n", str5, str6);
 	printf("strcmp: %d\n", strcmp(str5, str6));
 	printf("ft_strcmp: %d\n", ft_strcmp(str5, str6));
 	printf("--------------------------\n");
-	printf("str7: %s\nstr8: %s\n", str7, str8);
+	printf("str7: \"%s\"\nstr8: \"%s\"\n", str7, str8);
 	printf("strcmp: %d\n", strcmp(str7, str8));
 	printf("ft_strcmp: %d\n", ft_strcmp(str7, str8));
 }
@@ -196,7 +195,7 @@ void			test_strdup(char *str)
 	char *buf;
 	char *buf2;
 
-	printf("str: %s | addr: %p\n\n", str, str);
+	printf("str: \"%s\" | addr: %p\n\n", str, str);
 	buf = strdup(str);
 	buf2 = ft_strdup(str);
 	printf("strdup(\"%s\"): %s | addr: %p\n", str, buf, buf);
@@ -234,18 +233,22 @@ t_list			*new_elem(void *data)
 
 void			test_ft_list_size(void)
 {
+	printf("-------------------------\n");
+	printf("--- ft_list_size test ---\n");
+	printf("-------------------------\n");
+	
 	t_list 		*tmp = NULL;
 	t_list		*begin = new_elem("1");
 	t_list		*e1 = new_elem("2");
 	t_list		*e2 = new_elem("3");
 	t_list		*e3 = new_elem("4");
-	t_list		*e4 = new_elem("5");
-	t_list		*e5 = new_elem("6");
 
 	begin->next = e1;
 	e1->next = e2;
 	e2->next = e3;
 	printf("ft_list_size: %d\n", ft_list_size(begin));
+	t_list		*e4 = new_elem("5");
+	t_list		*e5 = new_elem("6");
 	e3->next = e4;
 	e4->next = e5;
 	printf("added 2 elements in the list\n");
