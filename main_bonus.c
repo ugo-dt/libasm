@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:27:20 by ugdaniel          #+#    #+#             */
-/*   Updated: 2021/05/07 12:30:44 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:14:01 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int				ft_strcmp(const char *s1, const char *s2);
 ssize_t			ft_write(int fd, const void *buf, size_t count);
 ssize_t			ft_read(int fd, void *buf, size_t count);
 char			*ft_strdup(const char *s);
+
+/* Bonuses */
+void			ft_list_push_front(t_list **begin_list, void *data);
+int				ft_list_size(t_list *begin);
 
 void			test_ft_strlen(void)
 {
@@ -216,6 +220,45 @@ void			test_ft_strdup(void)
 	test_strdup("salut");
 }
 
+t_list			*new_elem(void *data)
+{
+	t_list	*ret;
+
+	if (!(ret = malloc(sizeof(t_list))))
+		return (NULL);
+	ret->data = data;
+	ret->next = NULL;
+	printf("elem %s created\n", data);
+	return (ret);
+}
+
+void			test_ft_list_size(void)
+{
+	t_list 		*tmp = NULL;
+	t_list		*begin = new_elem("1");
+	t_list		*e1 = new_elem("2");
+	t_list		*e2 = new_elem("3");
+	t_list		*e3 = new_elem("4");
+	t_list		*e4 = new_elem("5");
+	t_list		*e5 = new_elem("6");
+
+	begin->next = e1;
+	e1->next = e2;
+	e2->next = e3;
+	printf("ft_list_size: %d\n", ft_list_size(begin));
+	e3->next = e4;
+	e4->next = e5;
+	printf("added 2 elements in the list\n");
+	printf("ft_list_size: %d\n", ft_list_size(begin));
+	while (begin)
+	{
+		tmp = begin;
+		begin = begin->next;
+		free(tmp);
+		tmp = NULL;
+	}
+}
+
 int				main(void)
 {
 	test_ft_strlen();
@@ -224,5 +267,6 @@ int				main(void)
 	test_ft_write();
 	test_ft_read();
 	test_ft_strdup();
+	test_ft_list_size();
 	return (0);
 }
