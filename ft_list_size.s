@@ -2,7 +2,7 @@ section .text
 global ft_list_size
 
 ft_list_size:
-	mov		rsi, rdi
+	push	rdi
 	xor		rax, rax
 
 count:
@@ -13,5 +13,5 @@ count:
 	jmp		count
 
 return:
-	mov		rdi, rsi
+	pop		rdi
 	ret
